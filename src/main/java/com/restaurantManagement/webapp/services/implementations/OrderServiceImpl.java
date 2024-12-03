@@ -6,7 +6,6 @@ import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
 import com.restaurantManagement.webapp.repositories.OrderItemRepository;
 import com.restaurantManagement.webapp.repositories.OrderRepository;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

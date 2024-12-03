@@ -20,7 +20,7 @@ public class MenuController {
     private DishService dishService;
 
     @GetMapping
-    public String getAllDishes(Model model) {
+    public String getAllDishes(Model model) { // TODO: check if dishes exist in DB; make menu template prettier
         List<Dish> dishes = dishService.getAllDishes();
         List<Map<String, Object>> rows = new ArrayList<>();
 
@@ -39,8 +39,22 @@ public class MenuController {
     }
 
     @GetMapping("/{id}")
-    public Dish getDishById(@PathVariable Long id) {
-        return dishService.getDishById(id);
+    public String getDishById(@PathVariable Long id, Model model) { // TODO: make an additional template explicitly
+        // for one dish; check if dish with id exists
+        List<Map<String, Object>> rows = new ArrayList<>();
+        Map<String, Object> row = new HashMap<>();
+        Dish dish = dishService.getDishById(id);
+
+        row.put("id", dish.getId());
+        row.put("name", dish.getName());
+        row.put("description", dish.getDescription());
+        row.put("weight", dish.getWeight());
+        row.put("price", dish.getPrice());
+        rows.add(row);
+
+        model.addAttribute("rows", rows);
+
+        return "menu";
     }
 
 }

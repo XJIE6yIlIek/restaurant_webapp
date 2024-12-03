@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class User { // TODO: make it as it should be (spring's UserDetails thingy should be better, than your own implementation)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
