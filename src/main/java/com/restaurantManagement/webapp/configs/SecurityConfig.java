@@ -1,46 +1,41 @@
 //package com.restaurantManagement.webapp.configs;
 //
 //
-//import com.restaurantManagement.webapp.services.implementations.UserServiceImpl;
-//import com.restaurantManagement.webapp.services.interfaces.UserService;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-//import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.core.userdetails.User;
-//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //import org.springframework.security.web.SecurityFilterChain;
 //
 //@Configuration
 //@EnableWebSecurity
-//@EnableGlobalMethodSecurity
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 //public class SecurityConfig {
 //
 //    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { // TODO: make clients as non-authed users
 //        http
 //            .authorizeHttpRequests(auth -> {
+//                auth.requestMatchers("/menu/**").permitAll();
+//                auth.requestMatchers("/profile").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN");
+//                auth.requestMatchers("/orders").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN");
+//                auth.requestMatchers("/manager/**").hasAnyRole("MANAGER", "ADMIN");
 //                auth.requestMatchers("/admin/**").hasRole("ADMIN");
-//                auth.requestMatchers("/manager/**").hasRole("MANAGER");
-//                auth.requestMatchers("/employee/**").hasRole("EMPLOYEE");
-//                auth.requestMatchers("/client/**").hasRole("CLIENT");
 //                auth.anyRequest().permitAll();
 //            })
 //            .formLogin((form -> form
 //                .loginPage("/login")
 //                .permitAll())
 //            )
-//            .logout(logout -> logout.permitAll());
+//            .logout(logout -> logout
+//                    .permitAll());
 //        return http.build();
-//    }
-//
-//    @Bean
-//    public UserService userService() {
-//        return new UserServiceImpl();
 //    }
 //
 //    @Bean
@@ -48,4 +43,22 @@
 //        return new BCryptPasswordEncoder();
 //    }
 //
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsService() {
+//        UserDetails user1 = User.withUsername("employee")
+//                .password(passwordEncoder().encode("aaa"))
+//                .roles("EMPLOYEE")
+//                .build();
+//        UserDetails user2 = User.withUsername("manager")
+//                .password(passwordEncoder().encode("bbb"))
+//                .roles("MANAGER")
+//                .build();
+//        UserDetails admin = User.withUsername("admin")
+//                .password(passwordEncoder().encode("ccc"))
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user1, user2, admin);
+//    }
+//
 //}
+// TODO: forget about security for now, do it in the end (also, forget about users, for now)

@@ -1,11 +1,14 @@
 package com.restaurantManagement.webapp.services.implementations;
 
+import com.restaurantManagement.webapp.dto.UserDTO;
 import com.restaurantManagement.webapp.models.User;
 import com.restaurantManagement.webapp.repositories.UserRepository;
 import com.restaurantManagement.webapp.services.interfaces.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -13,7 +16,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 //    @Autowired
-//    private PasswordEncoder passwordEncoder; // FIXME: Add passwordEncoder as a bean (somehow???)
+//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
     @Override
     public User getUserById(Long id) {
@@ -22,13 +32,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     @Override
-    public User createUser(User user) {
+    public UserDTO createUser(UserDTO userDTO) {
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(modelMapper.map(userDTO, User.class));
+        return userDTO;
     }
 
     @Override
