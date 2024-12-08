@@ -9,7 +9,7 @@ public interface EventService {
     Event createEvent(Event event);
     Event updateEvent(Event event);
     void deleteEvent(Long id);
-    List<Event> getAllEvent();
+    List<Event> getAllEvents();
     Event getEventById(Long id);
 
 }

@@ -33,5 +33,6 @@ CREATE TABLE IF NOT EXISTS users (
 	user_id serial PRIMARY KEY,
 	username varchar(32) NOT NULL UNIQUE,
 	user_password varchar(64) NOT NULL,
+	user_enabled boolean NOT NULL,
 	user_role varchar(32) NOT NULL
 );

@@ -25,7 +25,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish addDish(Dish dish) {
+    public Dish createDish(Dish dish) {
         return dishRepository.save(dish);
     }
 

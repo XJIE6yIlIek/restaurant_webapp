@@ -8,7 +8,7 @@ public interface DishService {
 
     List<Dish> getAllDishes();
     Dish getDishById(Long id);
-    Dish addDish(Dish dish);
+    Dish createDish(Dish dish);
     void deleteDish(Long id);
     Dish updateDish(Dish dish);
 

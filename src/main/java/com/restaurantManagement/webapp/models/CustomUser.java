@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter @Getter
 @Entity
 @Table(name = "users")
-public class User { // TODO: make it as it should be (spring's UserDetails thingy should be better, than your own implementation)
+public class CustomUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,10 @@ public class User { // TODO: make it as it should be (spring's UserDetails thing
     private String username;
     @Column(name = "user_password", nullable = false)
     private String password;
+    @Column(name = "user_enabled", nullable = false)
+    private boolean enabled;
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_role")
+    @Column(name = "user_role", nullable = false)
     private UserRole role;
 
 }

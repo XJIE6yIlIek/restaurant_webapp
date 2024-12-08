@@ -12,5 +12,7 @@ public interface OrderService {
     Order addOrderItem(Long orderId, OrderItem orderItem);
     Order updateOrderStatus(Long orderId, OrderStatus status);
     List<Order> getOrdersByStatus(OrderStatus status);
+    List<Order> getAllOrders();
+    Order getOrderById(Long id);
 
 }
