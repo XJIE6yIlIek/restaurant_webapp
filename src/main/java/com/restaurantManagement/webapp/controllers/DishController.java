@@ -26,12 +26,12 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public Dish createDish(Dish dish) {
+    public Dish createDish(@RequestParam Dish dish) {
         return dishService.createDish(dish);
     }
 
     @PostMapping("/update")
-    public Dish updateDish(Dish dish) {
+    public Dish updateDish(@RequestParam Dish dish) {
         return dishService.updateDish(dish);
     }
 

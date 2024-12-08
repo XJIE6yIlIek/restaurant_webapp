@@ -3,7 +3,6 @@ package com.restaurantManagement.webapp.controllers;
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +31,12 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public Order createOrder(Order order) {
+    public Order createOrder(@RequestParam Order order) {
         return orderService.createOrder(order);
     }
 
     @PostMapping("/update")
-    public Order updateOrderStatus(Long id, String status) {
+    public Order updateOrderStatus(@RequestParam(name = "id") Long id, @RequestParam(name = "status") String status) {
         return orderService.updateOrderStatus(id, OrderStatus.valueOf(status));
     }
 

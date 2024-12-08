@@ -2,10 +2,10 @@ package com.restaurantManagement.webapp.models;
 
 import com.restaurantManagement.webapp.models.modelsUtility.UserRole;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class CustomUser {
@@ -23,5 +23,12 @@ public class CustomUser {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role", nullable = false)
     private UserRole role;
+
+    public CustomUser(String username, String password, boolean enabled, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.role = role;
+    }
 
 }

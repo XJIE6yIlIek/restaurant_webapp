@@ -25,12 +25,12 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public Event createEvent(Event event) {
+    public Event createEvent(@RequestParam Event event) {
         return eventService.createEvent(event);
     }
 
     @PostMapping("/update")
-    public Event updateEvent(Event event) {
+    public Event updateEvent(@RequestParam Event event) {
         return eventService.updateEvent(event);
     }
 

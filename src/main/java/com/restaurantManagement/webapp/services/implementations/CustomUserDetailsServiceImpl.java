@@ -1,7 +1,6 @@
 package com.restaurantManagement.webapp.services.implementations;
 
 import com.restaurantManagement.webapp.models.CustomUser;
-import com.restaurantManagement.webapp.models.modelsUtility.UserRole;
 import com.restaurantManagement.webapp.repositories.UserRepository;
 import com.restaurantManagement.webapp.services.implementations.utility.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +9,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomUserDetailsServiceImpl implements UserDetailsService    {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -48,9 +45,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService    {
     }
 
     public CustomUser addUser(CustomUser user) {
-        String decodedPassword = user.getPassword();
-        String encodedPassword = passwordEncoder.encode(decodedPassword);
-        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 

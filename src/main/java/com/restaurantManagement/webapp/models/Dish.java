@@ -1,10 +1,13 @@
 package com.restaurantManagement.webapp.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "menu")
 public class Dish {
@@ -21,5 +24,12 @@ public class Dish {
     private float weight;
     @Column(name = "dish_price", nullable = false)
     private float price;
+
+    public Dish(String name, String description, float weight, float price) {
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+        this.price = price;
+    }
 
 }

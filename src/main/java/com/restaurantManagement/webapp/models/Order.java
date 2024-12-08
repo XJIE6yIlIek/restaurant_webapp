@@ -3,7 +3,9 @@ package com.restaurantManagement.webapp.models;
 
 import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -29,5 +32,12 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "order_items", nullable = false)
     private List<OrderItem> orderItems = new ArrayList<>();
+
+    public Order(String number, OrderStatus status, LocalDateTime timestamp, List<OrderItem> orderItems) {
+        this.number = number;
+        this.status = status;
+        this.timestamp = timestamp;
+        this.orderItems = orderItems;
+    }
 
 }
