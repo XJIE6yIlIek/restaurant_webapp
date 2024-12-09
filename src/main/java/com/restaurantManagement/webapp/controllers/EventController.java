@@ -20,7 +20,7 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public Event getEventById(@PathVariable Long id) {
+    public Event getEventById(@PathVariable("id") Long id) {
         return eventService.getEventById(id);
     }
 
@@ -29,13 +29,14 @@ public class EventController {
         return eventService.createEvent(event);
     }
 
-    @PostMapping("/update")
-    public Event updateEvent(@RequestParam Event event) {
+    @PostMapping("/update/{id}")
+    public Event updateEvent(@PathVariable("id") Long id, @RequestParam Event event) {
+        event.setId(id);
         return eventService.updateEvent(event);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteEvent(Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteEvent(@PathVariable("id") Long id) {
         eventService.deleteEvent(id);
     }
 

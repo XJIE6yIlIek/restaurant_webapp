@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl implements EventService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
 
     @Autowired
     private EventRepository eventRepository;

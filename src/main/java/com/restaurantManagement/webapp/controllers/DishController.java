@@ -21,22 +21,23 @@ public class DishController {
     }
 
     @GetMapping("/{id}")
-    public Dish getDishById(@PathVariable Long id) {
+    public Dish getDishById(@PathVariable("id") Long id) {
         return dishService.getDishById(id);
     }
 
     @PostMapping("/create")
-    public Dish createDish(@RequestParam Dish dish) {
+    public Dish createDish(@RequestBody Dish dish) {
         return dishService.createDish(dish);
     }
 
-    @PostMapping("/update")
-    public Dish updateDish(@RequestParam Dish dish) {
+    @PostMapping("/update/{id}")
+    public Dish updateDish(@PathVariable("id") Long id, @RequestBody Dish dish) {
+        dish.setId(id);
         return dishService.updateDish(dish);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteDish(Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteDish(@PathVariable("id") Long id) {
         dishService.deleteDish(id);
     }
 

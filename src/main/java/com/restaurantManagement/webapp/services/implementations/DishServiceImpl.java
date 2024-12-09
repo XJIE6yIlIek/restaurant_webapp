@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DishServiceImpl implements DishService {
+public class DishServiceImpl implements DishService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
 
     @Autowired
     private DishRepository dishRepository;
