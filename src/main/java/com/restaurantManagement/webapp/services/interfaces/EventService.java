@@ -1,13 +1,15 @@
 package com.restaurantManagement.webapp.services.interfaces;
 
 import com.restaurantManagement.webapp.models.Event;
+import com.restaurantManagement.webapp.models.dtos.EventDTO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface EventService {
 
-    Event createEvent(Event event);
-    Event updateEvent(Event event);
+    ResponseEntity<Event> createEvent(EventDTO event);
+    ResponseEntity<Event> updateEvent(EventDTO event);
     void deleteEvent(Long id);
     List<Event> getAllEvents();
     Event getEventById(Long id);

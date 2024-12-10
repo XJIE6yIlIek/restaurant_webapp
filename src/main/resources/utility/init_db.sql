@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS menu (
+CREATE TABLE IF NOT EXISTS dishes (
 	dish_id serial PRIMARY KEY,
 	dish_name varchar(255) NOT NULL,
 	dish_description varchar(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS orders (
 CREATE TABLE IF NOT EXISTS order_items (
 	item_id serial PRIMARY KEY,
 	order_id serial REFERENCES orders(order_id),
-	dish_id serial REFERENCES menu(dish_id),
+	dish_id serial REFERENCES dishes(dish_id),
 	item_quantity integer NOT NULL
 );
 

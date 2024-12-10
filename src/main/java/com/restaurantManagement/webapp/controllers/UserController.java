@@ -1,7 +1,8 @@
 package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.CustomUser;
-import com.restaurantManagement.webapp.services.interfaces.CustomUserDetailsService;
+import com.restaurantManagement.webapp.models.dtos.CustomUserDTO;
+import com.restaurantManagement.webapp.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,34 +14,34 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    CustomUserDetailsService userDetailsService;
+    UserService userService;
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<CustomUser> getAllUsers() {
-        return userDetailsService.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
     public CustomUser getUserById(@PathVariable("id") Long id) {
-        return userDetailsService.getUserById(id);
+        return userService.getUserById(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CustomUser> createUser(@RequestBody CustomUser user) {
-        return userDetailsService.createUser(user);
+    public ResponseEntity<CustomUser> createUser(@RequestBody CustomUserDTO userDTO) {
+        return userService.createUser(userDTO);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<CustomUser> updateUser(@PathVariable("id") Long id, @RequestBody CustomUser user) {
-        user.setId(id);
-        return userDetailsService.updateUser(user);
+    public ResponseEntity<CustomUser> updateUser(@PathVariable("id") Long id, @RequestBody CustomUserDTO userDTO) {
+        userDTO.setId(id);
+        return userService.updateUser(userDTO);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
-        userDetailsService.deleteUser(id);
+        userService.deleteUser(id);
     }
 
 }

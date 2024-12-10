@@ -1,11 +1,15 @@
 package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.Order;
+import com.restaurantManagement.webapp.models.dtos.OrderDTO;
 import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,12 +35,14 @@ public class OrderController {
     }
 
     @PostMapping("/create") // FIXME: CHINIT (sm postman)
-    public Order createOrder(@RequestParam Order order) {
-        return orderService.createOrder(order);
+    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+        LocalDateTime dateNow = LocalDateTime.now();
+        orderDTO.setTimestamp(dateNow);
+        return orderService.createOrder(orderDTO);
     }
 
     @PostMapping("/update/{id}")
-    public Order updateOrderStatus(@PathVariable("id") Long id, @RequestBody String status) {
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable("id") Long id, @RequestBody String status) {
         return orderService.updateOrderStatus(id, OrderStatus.valueOf(status));
     }
 

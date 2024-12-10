@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Setter @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "events")
-public class Event {
+public class Event { // FIXME: change table events in database a bit...(instead of time and date - timestamp)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,18 +24,15 @@ public class Event {
     private String name;
     @Column(name = "event_description", nullable = false)
     private String description;
-    @Column(name = "event_date", nullable = false)
-    private LocalDate date;
-    @Column(name = "event_time", nullable = false)
-    private LocalTime time;
+    @Column(name = "event_timestamp", nullable = false)
+    private LocalDateTime timestamp;
     @Column(name = "event_capacity", nullable = false)
     private Integer capacity;
 
-    public Event(String name, String description, LocalDate date, LocalTime time, Integer capacity) {
+    public Event(String name, String description, LocalDateTime timestamp, LocalTime time, Integer capacity) {
         this.name = name;
         this.description = description;
-        this.date = date;
-        this.time = time;
+        this.timestamp = timestamp;
         this.capacity = capacity;
     }
 

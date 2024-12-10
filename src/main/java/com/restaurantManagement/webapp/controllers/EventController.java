@@ -1,8 +1,10 @@
 package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.Event;
+import com.restaurantManagement.webapp.models.dtos.EventDTO;
 import com.restaurantManagement.webapp.services.interfaces.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +27,14 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public Event createEvent(@RequestParam Event event) {
-        return eventService.createEvent(event);
+    public ResponseEntity<Event> createEvent(@RequestParam EventDTO eventDTO) {
+        return eventService.createEvent(eventDTO);
     }
 
     @PostMapping("/update/{id}")
-    public Event updateEvent(@PathVariable("id") Long id, @RequestParam Event event) {
-        event.setId(id);
-        return eventService.updateEvent(event);
+    public ResponseEntity<Event> updateEvent(@PathVariable("id") Long id, @RequestParam EventDTO eventDTO) {
+        eventDTO.setId(id);
+        return eventService.updateEvent(eventDTO);
     }
 
     @DeleteMapping("/delete/{id}")

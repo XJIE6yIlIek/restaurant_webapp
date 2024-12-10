@@ -31,13 +31,18 @@ public class Order {
     private LocalDateTime timestamp;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "order_items", nullable = false)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems;
 
     public Order(String number, OrderStatus status, LocalDateTime timestamp, List<OrderItem> orderItems) {
         this.number = number;
         this.status = status;
         this.timestamp = timestamp;
         this.orderItems = orderItems;
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
     }
 
 }

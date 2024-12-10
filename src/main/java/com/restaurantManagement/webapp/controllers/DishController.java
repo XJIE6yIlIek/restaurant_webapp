@@ -1,8 +1,10 @@
 package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.Dish;
+import com.restaurantManagement.webapp.models.dtos.DishDTO;
 import com.restaurantManagement.webapp.services.interfaces.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +28,14 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public Dish createDish(@RequestBody Dish dish) {
-        return dishService.createDish(dish);
+    public ResponseEntity<Dish> createDish(@RequestBody DishDTO dishDTO) {
+        return dishService.createDish(dishDTO);
     }
 
     @PostMapping("/update/{id}")
-    public Dish updateDish(@PathVariable("id") Long id, @RequestBody Dish dish) {
-        dish.setId(id);
-        return dishService.updateDish(dish);
+    public ResponseEntity<Dish> updateDish(@PathVariable("id") Long id, @RequestBody DishDTO dishDTO) {
+        dishDTO.setId(id);
+        return dishService.updateDish(dishDTO);
     }
 
     @DeleteMapping("/delete/{id}")

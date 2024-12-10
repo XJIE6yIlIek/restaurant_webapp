@@ -1,12 +1,19 @@
 package com.restaurantManagement.webapp.services.implementations;
 
+import com.restaurantManagement.webapp.models.Dish;
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.OrderItem;
+import com.restaurantManagement.webapp.models.dtos.OrderDTO;
+import com.restaurantManagement.webapp.models.dtos.OrderItemDTO;
 import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
+import com.restaurantManagement.webapp.repositories.DishRepository;
 import com.restaurantManagement.webapp.repositories.OrderItemRepository;
 import com.restaurantManagement.webapp.repositories.OrderRepository;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
+import jakarta.transaction.Transactional;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,33 +24,34 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
-    private OrderItemRepository orderItemRepository;
+    private DishRepository dishRepository;
 
     @Override
-    public Order createOrder(Order order) {
-        return orderRepository.save(order);
-    }
+    @Transactional
+    public ResponseEntity<Order> createOrder(OrderDTO orderDTO) {
 
-    @Override
-    public Order addOrderItem(Long orderId, OrderItem orderItem) {
-        Order order = orderRepository.findById(orderId).orElse(null);
-        if (order != null) {
-            orderItem.setOrder(order);
-            order.getOrderItems().add(orderItem);
-            orderItemRepository.save(orderItem);
-            return orderRepository.save(order);
+        Order order = new Order();
+        for (OrderItemDTO orderItemDTO : orderDTO.getOrderItems()) {
+            Dish dish = dishRepository.findById(orderItemDTO.getDish().getId())
+                    .orElseThrow(() -> new RuntimeException("Dish not found"));
+            OrderItem orderItem = new OrderItem();
+            orderItem.setDish(dish);
+            orderItem.setQuantity(orderItemDTO.getQuantity());
+            order.addOrderItem(orderItem);
         }
-        return null;
+
+        return ResponseEntity.ok(orderRepository.save(order));
     }
 
     @Override
-    public Order updateOrderStatus(Long orderId, OrderStatus status) {
+    @Transactional
+    public ResponseEntity<Order> updateOrderStatus(Long orderId, OrderStatus status) {
         Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             order.setStatus(status);
-            return orderRepository.save(order);
+            return ResponseEntity.ok(orderRepository.save(order));
         }
-        return null;
+        return ResponseEntity.ofNullable(null);
     }
 
     @Override
