@@ -2,6 +2,7 @@ package com.restaurantManagement.webapp.services.implementations;
 
 import com.restaurantManagement.webapp.models.CustomUser;
 import com.restaurantManagement.webapp.models.dtos.CustomUserDTO;
+import com.restaurantManagement.webapp.models.modelsUtility.UserRole;
 import com.restaurantManagement.webapp.repositories.UserRepository;
 import com.restaurantManagement.webapp.services.interfaces.UserService;
 import jakarta.transaction.Transactional;
@@ -37,7 +38,11 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setEnabled(true);
-        user.setRole(userDTO.getRole());
+        try {
+            user.setRole(UserRole.valueOf(userDTO.getRole()));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid user role: " + userDTO.getRole());
+        }
         return ResponseEntity.ok(userRepository.save(user));
     }
 
@@ -55,7 +60,11 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setEnabled(true);
-        user.setRole(userDTO.getRole());
+        try {
+            user.setRole(UserRole.valueOf(userDTO.getRole()));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid user role: " + userDTO.getRole());
+        }
         return ResponseEntity.ok(userRepository.save(user));
     }
 

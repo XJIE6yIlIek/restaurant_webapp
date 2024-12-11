@@ -14,6 +14,6 @@ public class CustomUserDTO {
     private String username;
     private String password;
     private boolean enabled;
-    private UserRole role;
+    private String role;
 
 }

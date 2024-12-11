@@ -24,11 +24,4 @@ public class CustomUser {
     @Column(name = "user_role", nullable = false)
     private UserRole role;
 
-    public CustomUser(String username, String password, boolean enabled, UserRole role) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.role = role;
-    }
-
 }

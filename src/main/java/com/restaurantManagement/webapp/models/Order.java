@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter @Getter
-@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -23,7 +22,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
     @Column(name = "table_number", nullable = false)
-    private String number;
+    private String tableNumber;
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus status;
@@ -33,16 +32,8 @@ public class Order {
     @Column(name = "order_items", nullable = false)
     private List<OrderItem> orderItems;
 
-    public Order(String number, OrderStatus status, LocalDateTime timestamp, List<OrderItem> orderItems) {
-        this.number = number;
-        this.status = status;
-        this.timestamp = timestamp;
-        this.orderItems = orderItems;
-    }
-
-    public void addOrderItem(OrderItem orderItem) {
-        this.orderItems.add(orderItem);
-        orderItem.setOrder(this);
+    public Order() {
+        this.timestamp = LocalDateTime.now();
     }
 
 }

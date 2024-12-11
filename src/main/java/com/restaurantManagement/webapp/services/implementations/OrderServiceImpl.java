@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
@@ -31,15 +33,23 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
     public ResponseEntity<Order> createOrder(OrderDTO orderDTO) {
 
         Order order = new Order();
-        for (OrderItemDTO orderItemDTO : orderDTO.getOrderItems()) {
-            Dish dish = dishRepository.findById(orderItemDTO.getDish().getId())
-                    .orElseThrow(() -> new RuntimeException("Dish not found"));
-            OrderItem orderItem = new OrderItem();
-            orderItem.setDish(dish);
-            orderItem.setQuantity(orderItemDTO.getQuantity());
-            order.addOrderItem(orderItem);
+        order.setTableNumber(orderDTO.getTableNumber());
+        try {
+            order.setStatus(OrderStatus.valueOf(orderDTO.getStatus()));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid order status: " + orderDTO.getStatus());
         }
 
+        List<OrderItem> items = orderDTO.getOrderItems().stream()
+                .map(orderItemDTO -> {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.setDishId(orderItemDTO.getDishId());
+                    orderItem.setQuantity(orderItemDTO.getQuantity());
+                    orderItem.setOrder(order);
+                    return orderItem;
+                }).toList();
+
+        order.setOrderItems(items);
         return ResponseEntity.ok(orderRepository.save(order));
     }
 

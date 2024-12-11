@@ -19,16 +19,9 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    @ManyToOne
-    @JoinColumn(name = "dish_id")
-    private Dish dish;
+    @Column(name = "dish_id")
+    private Long dishId;
     @Column(name = "item_quantity", nullable = false)
     private Integer quantity;
-
-    public OrderItem(Order order, Dish dish, Integer quantity) {
-        this.order = order;
-        this.dish = dish;
-        this.quantity = quantity;
-    }
 
 }

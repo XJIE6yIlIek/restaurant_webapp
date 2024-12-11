@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public class OrderController {
 
     @Autowired
@@ -36,8 +36,6 @@ public class OrderController {
 
     @PostMapping("/create") // FIXME: CHINIT (sm postman)
     public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
-        LocalDateTime dateNow = LocalDateTime.now();
-        orderDTO.setTimestamp(dateNow);
         return orderService.createOrder(orderDTO);
     }
 

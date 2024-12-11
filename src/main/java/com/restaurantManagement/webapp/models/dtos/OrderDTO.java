@@ -12,8 +12,8 @@ import java.util.List;
 public class OrderDTO {
 
     private Long id;
-    private String number;
-    private OrderStatus status;
+    private String tableNumber;
+    private String status;
     private LocalDateTime timestamp;
     private List<OrderItemDTO> orderItems;
 

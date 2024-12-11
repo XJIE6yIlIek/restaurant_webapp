@@ -25,11 +25,4 @@ public class Dish {
     @Column(name = "dish_price", nullable = false)
     private float price;
 
-    public Dish(String name, String description, float weight, float price) {
-        this.name = name;
-        this.description = description;
-        this.weight = weight;
-        this.price = price;
-    }
-
 }

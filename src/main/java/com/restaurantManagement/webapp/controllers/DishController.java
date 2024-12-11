@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/api/dishes")
 public class DishController {
 
     @Autowired

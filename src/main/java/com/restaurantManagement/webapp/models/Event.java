@@ -29,11 +29,4 @@ public class Event { // FIXME: change table events in database a bit...(instead 
     @Column(name = "event_capacity", nullable = false)
     private Integer capacity;
 
-    public Event(String name, String description, LocalDateTime timestamp, LocalTime time, Integer capacity) {
-        this.name = name;
-        this.description = description;
-        this.timestamp = timestamp;
-        this.capacity = capacity;
-    }
-
 }
