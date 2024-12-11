@@ -10,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Configuration
 @EnableWebSecurity
@@ -38,22 +40,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { // FIXME: disable default login form; edit access to different urls; make it so everything works correctly with rest
-        http.formLogin(AbstractHttpConfigurer::disable);
-        http.formLogin(form ->
-             form.loginPage("/api/login").permitAll()
-        );
         http
-            .authorizeHttpRequests(auth ->
-                    {
-                        auth.requestMatchers("/api/**").hasAnyRole("EMPLOYEE", "MANAGER", "ADMIN");
-                        auth.requestMatchers("/api/dishes").permitAll();
-                        auth.requestMatchers("/api/events").permitAll();
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeHttpRequests(auth -> {
+                        auth.requestMatchers("/api/login").permitAll();
                         auth.anyRequest().authenticated();
-                    }
-            );
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.httpBasic(AbstractHttpConfigurer::disable);
-        http.csrf(AbstractHttpConfigurer::disable);
+                        }
+                ); // TODO: Add filter as in the last message in ds (it should allow app to auth users correctly)
         return http.build();
     }
 

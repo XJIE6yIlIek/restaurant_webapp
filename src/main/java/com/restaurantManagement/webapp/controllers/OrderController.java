@@ -34,7 +34,7 @@ public class OrderController {
         return orderService.getOrdersByStatus(OrderStatus.valueOf(status));
     }
 
-    @PostMapping("/create") // FIXME: CHINIT (sm postman)
+    @PostMapping("/create")
     public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
         return orderService.createOrder(orderDTO);
     }
