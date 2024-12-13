@@ -1,38 +1,49 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 CREATE TABLE IF NOT EXISTS dishes (
-	dish_id serial PRIMARY KEY,
-	dish_name varchar(255) NOT NULL,
-	dish_description varchar(255) NOT NULL,
-	dish_weight float NOT NULL,
-	dish_price float NOT NULL
+	id serial PRIMARY KEY,
+	name varchar(255) NOT NULL,
+	description varchar(255) NOT NULL,
+	weight float NOT NULL,
+	price float NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS events (
-	event_id serial PRIMARY KEY,
-	event_name varchar(255) NOT NULL,
-	event_description varchar(255) NOT NULL,
-	event_date date NOT NULL,
-	event_time time NOT NULL,
-	event_capacity integer NOT NULL
+	id serial PRIMARY KEY,
+	name varchar(255) NOT NULL,
+	description varchar(255) NOT NULL,
+	event_time timestamp NOT NULL,
+	capacity integer NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS order_statuses (
+    id serial PRIMARY KEY,
+    name varchar(32) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-	order_id serial PRIMARY KEY,
-	table_number varchar(8) NOT NULL,
-	order_status varchar(20) NOT NULL,
-	order_timestamp timestamp NOT NULL
+	id serial PRIMARY KEY,
+	number varchar(8) NOT NULL,
+	status varchar(20) REFERENCES order_statuses(id),
+	order_time timestamp NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS order_items (
-	item_id serial PRIMARY KEY,
-	order_id serial REFERENCES orders(order_id),
-	dish_id serial REFERENCES dishes(dish_id),
-	item_quantity integer NOT NULL
+	id serial PRIMARY KEY,
+	order_id serial REFERENCES orders(id),
+	dish_id serial REFERENCES dishes(id),
+	quantity integer NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_roles (
+    id serial PRIMARY KEY,
+    name varchar(32) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS users (
-	user_id serial PRIMARY KEY,
+	id serial PRIMARY KEY,
 	username varchar(32) NOT NULL UNIQUE,
-	user_password varchar(64) NOT NULL,
-	user_enabled boolean NOT NULL,
-	user_role varchar(32) NOT NULL
+	password varchar(64) NOT NULL,
+	role serial REFERENCES user_roles(id)
 );

@@ -2,14 +2,13 @@ package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.dtos.OrderDTO;
-import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
+import com.restaurantManagement.webapp.models.OrderStatus;
+import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,8 +29,8 @@ public class OrderController {
     }
 
     @GetMapping("/filter")
-    public List<Order> getOrdersByStatus(@RequestParam("status") String status) {
-        return orderService.getOrdersByStatus(OrderStatus.valueOf(status));
+    public List<Order> getOrdersByStatus(@RequestParam("status") OrderStatusDTO orderStatusDTO) {
+        return orderService.getOrdersByStatus(orderStatusDTO);
     }
 
     @PostMapping("/create")
@@ -40,8 +39,8 @@ public class OrderController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Order> updateOrderStatus(@PathVariable("id") Long id, @RequestBody String status) {
-        return orderService.updateOrderStatus(id, OrderStatus.valueOf(status));
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatusDTO orderStatusDTO) {
+        return orderService.updateOrderStatus(id, orderStatusDTO);
     }
 
 }

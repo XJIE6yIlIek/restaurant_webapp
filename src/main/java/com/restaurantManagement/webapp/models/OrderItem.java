@@ -14,14 +14,20 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_id")
+    @Column(name = "id")
     private Long id;
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
     @Column(name = "dish_id")
     private Long dishId;
-    @Column(name = "item_quantity", nullable = false)
-    private Integer quantity;
+    @Column(name = "quantity", nullable = false)
+    private Long quantity;
+
+    public OrderItem(Order order, Long dishId, Long quantity) {
+        this.order = order;
+        this.dishId = dishId;
+        this.quantity = quantity;
+    }
 
 }

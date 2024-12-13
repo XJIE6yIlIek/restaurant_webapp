@@ -1,19 +1,13 @@
 package com.restaurantManagement.webapp.services.implementations;
 
-import com.restaurantManagement.webapp.models.CustomUser;
-import com.restaurantManagement.webapp.models.dtos.CustomUserDTO;
+import com.restaurantManagement.webapp.models.User;
 import com.restaurantManagement.webapp.repositories.UserRepository;
-import com.restaurantManagement.webapp.services.implementations.utility.CustomUserDetails;
-import com.restaurantManagement.webapp.services.interfaces.UserService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -28,25 +22,14 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        CustomUser user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
-            throw new UsernameNotFoundException("No user found with username: " + username);
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        return new CustomUserDetails(
-                user.getUsername(),
-                user.getPassword(),
-                user.isEnabled(),
-                loadAuthorities(user)
-        );
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                List.of(new SimpleGrantedAuthority(user.getRole().getName())));
 
-    }
-
-    private Collection<? extends GrantedAuthority> loadAuthorities(CustomUser user) {
-        String userRole = user.getRole().toString();
-        GrantedAuthority userAuthority = new SimpleGrantedAuthority(userRole);
-
-        return List.of(userAuthority);
     }
 
 }

@@ -13,7 +13,7 @@ public class EventDTO {
     private Long id;
     private String name;
     private String description;
-    private LocalDateTime timestamp;
-    private Integer capacity;
+    private LocalDateTime eventTime;
+    private Long capacity;
 
 }

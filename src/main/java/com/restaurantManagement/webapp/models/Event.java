@@ -18,15 +18,24 @@ public class Event { // FIXME: change table events in database a bit...(instead 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_id")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "event_name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "event_description", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "event_timestamp", nullable = false)
-    private LocalDateTime timestamp;
-    @Column(name = "event_capacity", nullable = false)
-    private Integer capacity;
+    @Column(name = "event_time", nullable = false)
+    private LocalDateTime eventTime;
+    @Column(name = "capacity", nullable = false)
+    private Long capacity;
+
+    public Event(String name, String description, LocalDateTime eventTime, Long capacity) {
+        this.name = name;
+        this.description = description;
+        this.eventTime = eventTime;
+        this.capacity = capacity;
+    }
+
+
 
 }

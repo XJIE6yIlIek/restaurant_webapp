@@ -1,15 +1,11 @@
 package com.restaurantManagement.webapp.models;
 
 
-import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter @Getter
@@ -19,21 +15,26 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "table_number", nullable = false)
     private String tableNumber;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "order_status")
+    @ManyToOne
+    @JoinColumn(name = "status")
     private OrderStatus status;
-    @Column(name = "order_timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    @Column(name = "order_time", nullable = false)
+    private LocalDateTime orderTime;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "order_items", nullable = false)
-    private List<OrderItem> orderItems;
+    private List<OrderItem> items;
+
+    public Order(String tableNumber, OrderStatus orderStatus, List<OrderItem> orderItems) {
+        this.tableNumber = tableNumber;
+        this.status = orderStatus;
+        this.items = orderItems;
+    }
 
     public Order() {
-        this.timestamp = LocalDateTime.now();
+        this.orderTime = LocalDateTime.now();
     }
 
 }

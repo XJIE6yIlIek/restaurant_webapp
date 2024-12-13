@@ -23,7 +23,7 @@ public class EventServiceImpl implements EventService { // TODO: make it so some
         Event event = new Event();
         event.setName(eventDTO.getName());
         event.setDescription(eventDTO.getDescription());
-        event.setTimestamp(eventDTO.getTimestamp());
+        event.setEventTime(eventDTO.getEventTime());
         event.setCapacity(event.getCapacity());
         return ResponseEntity.ok(eventRepository.save(event));
     }
@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService { // TODO: make it so some
         event.setId(eventDTO.getId());
         event.setName(eventDTO.getName());
         event.setDescription(eventDTO.getDescription());
-        event.setTimestamp(eventDTO.getTimestamp());
+        event.setEventTime(eventDTO.getEventTime());
         event.setCapacity(event.getCapacity());
         return ResponseEntity.ok(eventRepository.save(event));
     }

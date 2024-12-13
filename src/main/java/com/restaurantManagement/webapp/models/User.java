@@ -1,6 +1,5 @@
 package com.restaurantManagement.webapp.models;
 
-import com.restaurantManagement.webapp.models.modelsUtility.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,20 +7,23 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class CustomUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
-    @Column(name = "user_password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "user_enabled", nullable = false)
-    private boolean enabled;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_role", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role")
     private UserRole role;
 
+    public User(String username, String password, UserRole userRole) {
+        this.username = username;
+        this.password = password;
+        this.role = userRole;
+    }
 }

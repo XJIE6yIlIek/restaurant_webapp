@@ -1,7 +1,6 @@
 package com.restaurantManagement.webapp.models.dtos;
 
-import com.restaurantManagement.webapp.models.OrderItem;
-import com.restaurantManagement.webapp.models.modelsUtility.OrderStatus;
+import com.restaurantManagement.webapp.models.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +12,8 @@ public class OrderDTO {
 
     private Long id;
     private String tableNumber;
-    private String status;
-    private LocalDateTime timestamp;
-    private List<OrderItemDTO> orderItems;
+    private OrderStatus status;
+    private LocalDateTime orderTime;
+    private List<OrderItemDTO> items;
 
 }

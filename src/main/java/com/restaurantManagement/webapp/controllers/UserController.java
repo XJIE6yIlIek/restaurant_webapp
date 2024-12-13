@@ -1,7 +1,7 @@
 package com.restaurantManagement.webapp.controllers;
 
-import com.restaurantManagement.webapp.models.CustomUser;
-import com.restaurantManagement.webapp.models.dtos.CustomUserDTO;
+import com.restaurantManagement.webapp.models.User;
+import com.restaurantManagement.webapp.models.dtos.UserDTO;
 import com.restaurantManagement.webapp.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +19,22 @@ public class UserController {
     PasswordEncoder passwordEncoder;
 
     @GetMapping
-    public List<CustomUser> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public CustomUser getUserById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CustomUser> createUser(@RequestBody CustomUserDTO userDTO) {
+    public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<CustomUser> updateUser(@PathVariable("id") Long id, @RequestBody CustomUserDTO userDTO) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) {
         userDTO.setId(id);
         return userService.updateUser(userDTO);
     }

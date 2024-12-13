@@ -1,18 +1,17 @@
 package com.restaurantManagement.webapp.services.interfaces;
 
-import com.restaurantManagement.webapp.models.CustomUser;
-import com.restaurantManagement.webapp.models.dtos.CustomUserDTO;
+import com.restaurantManagement.webapp.models.User;
+import com.restaurantManagement.webapp.models.dtos.UserDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<CustomUser> getAllUsers();
-    CustomUser getUserById(Long id);
-    ResponseEntity<CustomUser> createUser(CustomUserDTO user);
+    List<User> getAllUsers();
+    User getUserById(Long id);
+    ResponseEntity<User> createUser(UserDTO user);
     void deleteUser(Long id);
-    ResponseEntity<CustomUser> updateUser(CustomUserDTO user);
+    ResponseEntity<User> updateUser(UserDTO user);
 
 }

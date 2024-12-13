@@ -1,14 +1,12 @@
 package com.restaurantManagement.webapp.repositories;
 
-
-import com.restaurantManagement.webapp.models.User;
+import com.restaurantManagement.webapp.models.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
 
-    User findByUsername(String username);
+    UserRole findByName(String name);
 
 }
