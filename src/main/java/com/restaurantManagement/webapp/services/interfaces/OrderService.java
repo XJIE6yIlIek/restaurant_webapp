@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface OrderService {
 
-    ResponseEntity<Order> createOrder(OrderDTO orderDTO);
-    ResponseEntity<Order> updateOrderStatus(Long orderId, OrderStatusDTO orderStatusDTO);
+    ResponseEntity<String> createOrder(OrderDTO orderDTO);
+    ResponseEntity<String> updateOrderStatus(OrderStatusDTO orderStatusDTO);
     List<Order> getOrdersByStatus(OrderStatusDTO statusDTO);
     List<Order> getAllOrders();
     Order getOrderById(Long id);

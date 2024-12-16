@@ -9,4 +9,8 @@ public class UserRoleDTO {
     private Long id;
     private String name;
 
+    public UserRoleDTO(String name) {
+        this.name = name;
+    }
+
 }

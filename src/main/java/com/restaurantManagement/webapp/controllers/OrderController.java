@@ -34,13 +34,14 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<String> createOrder(@RequestBody OrderDTO orderDTO) {
         return orderService.createOrder(orderDTO);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Order> updateOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatusDTO orderStatusDTO) {
-        return orderService.updateOrderStatus(id, orderStatusDTO);
+    public ResponseEntity<String> updateOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatusDTO orderStatusDTO) {
+        orderStatusDTO.setId(id);
+        return orderService.updateOrderStatus(orderStatusDTO);
     }
 
 }

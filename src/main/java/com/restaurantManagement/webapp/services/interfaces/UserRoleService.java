@@ -10,8 +10,8 @@ public interface UserRoleService {
 
     UserRole getRoleByName(String name);
     List<UserRole> getAllRoles();
-    ResponseEntity<UserRole> createRole(UserRoleDTO userRoleDTO);
-    ResponseEntity<UserRole> updateRole(UserRoleDTO userRoleDTO);
+    ResponseEntity<String> createRole(UserRoleDTO userRoleDTO);
+    ResponseEntity<String> updateRole(UserRoleDTO userRoleDTO);
     void deleteRole(Long id);
 
 }

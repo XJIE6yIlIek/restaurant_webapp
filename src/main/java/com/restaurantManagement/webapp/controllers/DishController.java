@@ -28,12 +28,12 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Dish> createDish(@RequestBody DishDTO dishDTO) {
+    public ResponseEntity<String> createDish(@RequestBody DishDTO dishDTO) {
         return dishService.createDish(dishDTO);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Dish> updateDish(@PathVariable("id") Long id, @RequestBody DishDTO dishDTO) {
+    public ResponseEntity<String> updateDish(@PathVariable("id") Long id, @RequestBody DishDTO dishDTO) {
         dishDTO.setId(id);
         return dishService.updateDish(dishDTO);
     }

@@ -11,6 +11,7 @@ import com.restaurantManagement.webapp.repositories.OrderStatusRepository;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +30,16 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
 
     @Override
     @Transactional
-    public ResponseEntity<Order> createOrder(OrderDTO orderDTO) {
-
+    public ResponseEntity<String> createOrder(OrderDTO orderDTO) {
+        String statusName = orderDTO.getStatus().getName();
+        String tableNumber = orderDTO.getTableNumber();
         Order order = new Order();
-        order.setTableNumber(orderDTO.getTableNumber());
-        try {
+        order.setTableNumber(tableNumber);
+        if (!Objects.isNull(orderStatusRepository.findByName(statusName))) {
             OrderStatus orderStatus = orderStatusRepository.findByName(orderDTO.getStatus().getName());
             order.setStatus(orderStatus);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid order status: " + orderDTO.getStatus().getName());
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Order status doesn't exist: " + statusName);
         }
 
         List<OrderItem> items = orderDTO.getItems().stream()
@@ -50,19 +52,25 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
                 }).toList();
 
         order.setItems(items);
-        return ResponseEntity.ok(orderRepository.save(order));
+        orderRepository.save(order);
+        return ResponseEntity.ok("Order successfully created: " + tableNumber);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<Order> updateOrderStatus(Long orderId, OrderStatusDTO orderStatusDTO) {
-        Order order = orderRepository.findById(orderId).orElse(null);
-        OrderStatus orderStatus = orderStatusRepository.findByName(orderStatusDTO.getName());
+    public ResponseEntity<String> updateOrderStatus(OrderStatusDTO orderStatusDTO) {
+        Long id = orderStatusDTO.getId();
+        String statusName = orderStatusDTO.getName();
+        Order order = orderRepository.findById(id).orElse(null);
+        OrderStatus orderStatus = orderStatusRepository.findByName(statusName);
+
         if (!Objects.isNull(order) && !Objects.isNull(orderStatus)) {
             order.setStatus(orderStatus);
-            return ResponseEntity.ok(orderRepository.save(order));
+            orderRepository.save(order);
+            return ResponseEntity.ok("Order's status successfully updated: " + id + statusName);
         } else {
-            throw new IllegalArgumentException("Either order or order status doesn't exist: " + order + "\n" + orderStatusDTO.getName());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Order with id doesn't exist: " + id +
+                                                                    "\nor order status with name doesn't exist: " + statusName);
         }
     }
 

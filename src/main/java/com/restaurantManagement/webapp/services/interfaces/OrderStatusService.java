@@ -10,8 +10,8 @@ public interface OrderStatusService {
 
     OrderStatus getStatusByName(String name);
     List<OrderStatus> getAllStatuses();
-    ResponseEntity<OrderStatus> createStatus(OrderStatusDTO orderStatusDTO);
-    ResponseEntity<OrderStatus> updateStatus(OrderStatusDTO orderStatusDTO);
+    ResponseEntity<String> createStatus(OrderStatusDTO orderStatusDTO);
+    ResponseEntity<String> updateStatus(OrderStatusDTO orderStatusDTO);
     void deleteStatus(Long id);
 
 }

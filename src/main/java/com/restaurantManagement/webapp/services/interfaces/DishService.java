@@ -10,8 +10,8 @@ public interface DishService {
 
     List<Dish> getAllDishes();
     Dish getDishById(Long id);
-    ResponseEntity<Dish> createDish(DishDTO dish);
+    ResponseEntity<String> createDish(DishDTO dish);
     void deleteDish(Long id);
-    ResponseEntity<Dish> updateDish(DishDTO dish);
+    ResponseEntity<String> updateDish(DishDTO dish);
 
 }

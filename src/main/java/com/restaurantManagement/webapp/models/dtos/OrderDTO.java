@@ -16,4 +16,11 @@ public class OrderDTO {
     private LocalDateTime orderTime;
     private List<OrderItemDTO> items;
 
+    public OrderDTO(String tableNumber, OrderStatus status, LocalDateTime orderTime, List<OrderItemDTO> items) {
+        this.tableNumber = tableNumber;
+        this.status = status;
+        this.orderTime = orderTime;
+        this.items = items;
+    }
+
 }

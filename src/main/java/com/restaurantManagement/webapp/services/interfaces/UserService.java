@@ -10,8 +10,8 @@ public interface UserService {
 
     List<User> getAllUsers();
     User getUserById(Long id);
-    ResponseEntity<User> createUser(UserDTO user);
+    ResponseEntity<String> createUser(UserDTO user);
+    ResponseEntity<String> updateUser(UserDTO user);
     void deleteUser(Long id);
-    ResponseEntity<User> updateUser(UserDTO user);
 
 }

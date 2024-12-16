@@ -16,4 +16,10 @@ public class EventDTO {
     private LocalDateTime eventTime;
     private Long capacity;
 
+    public EventDTO(String name, String description, LocalDateTime eventTime, Long capacity) {
+        this.name = name;
+        this.description = description;
+        this.eventTime = eventTime;
+        this.capacity = capacity;
+    }
 }

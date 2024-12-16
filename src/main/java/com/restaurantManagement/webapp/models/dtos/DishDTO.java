@@ -12,4 +12,10 @@ public class DishDTO {
     private float weight;
     private float price;
 
+    public DishDTO(String name, String description, float weight, float price) {
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+        this.price = price;
+    }
 }

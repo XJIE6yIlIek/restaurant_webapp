@@ -9,4 +9,7 @@ public class OrderStatusDTO {
     private Long id;
     private String name;
 
+    public OrderStatusDTO(String name) {
+        this.name = name;
+    }
 }
