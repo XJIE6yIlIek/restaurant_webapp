@@ -1,9 +1,11 @@
 package com.restaurantManagement.webapp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,14 +19,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "table_number", nullable = false)
+    @Column(name = "number", nullable = false)
     private String tableNumber;
     @ManyToOne
     @JoinColumn(name = "status")
     private OrderStatus status;
     @Column(name = "order_time", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private LocalDateTime orderTime;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<OrderItem> items;
 
     public Order(String tableNumber, OrderStatus orderStatus, List<OrderItem> orderItems) {

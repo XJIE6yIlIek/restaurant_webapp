@@ -10,6 +10,7 @@ public interface UserService {
 
     List<User> getAllUsers();
     User getUserById(Long id);
+    User getUserByUsername(String username);
     ResponseEntity<String> createUser(UserDTO user);
     ResponseEntity<String> updateUser(UserDTO user);
     void deleteUser(Long id);

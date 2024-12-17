@@ -58,14 +58,14 @@ public class SecurityConfig { // ОНО РАБОТАЕТ, НЕ ТРОГАААА�
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { // FIXME: edit access to different urls; make it so everything works correctly with rest
         http.cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session ->
-                                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> {
-                                        auth.requestMatchers("/api/login").permitAll();
-                                        auth.anyRequest().authenticated();
-                });
-        http.formLogin(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable);
+//                .sessionManagement(session ->
+//                                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> {
+//                                        auth.requestMatchers("/api/login").permitAll();
+//                                        auth.anyRequest().authenticated();
+//                });
+//        http.formLogin(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

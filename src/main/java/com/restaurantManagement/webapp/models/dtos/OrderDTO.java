@@ -2,12 +2,14 @@ package com.restaurantManagement.webapp.models.dtos;
 
 import com.restaurantManagement.webapp.models.OrderStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter @Getter
+@NoArgsConstructor
 public class OrderDTO {
 
     private Long id;

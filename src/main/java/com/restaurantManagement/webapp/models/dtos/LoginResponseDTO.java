@@ -1,17 +1,16 @@
 package com.restaurantManagement.webapp.models.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter @Getter
+@AllArgsConstructor
 @NoArgsConstructor
-public class OrderStatusDTO {
+public class LoginResponseDTO {
 
-    private Long id;
-    private String name;
+    private String username;
+    private String role;
 
-    public OrderStatusDTO(String name) {
-        this.name = name;
-    }
 }

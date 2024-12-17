@@ -28,8 +28,9 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
-    @GetMapping("/filter")
-    public List<Order> getOrdersByStatus(@RequestParam("status") OrderStatusDTO orderStatusDTO) {
+    @GetMapping("/filter/{status}")
+    public List<Order> getOrdersByStatus(@PathVariable("status") String statusName) {
+        OrderStatusDTO orderStatusDTO = new OrderStatusDTO(statusName.toUpperCase());
         return orderService.getOrdersByStatus(orderStatusDTO);
     }
 

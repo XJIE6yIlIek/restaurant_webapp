@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class Event { // FIXME: change table events in database a bit...(instead 
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "event_time", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private LocalDateTime eventTime;
     @Column(name = "capacity", nullable = false)
     private Long capacity;
@@ -35,7 +37,5 @@ public class Event { // FIXME: change table events in database a bit...(instead 
         this.eventTime = eventTime;
         this.capacity = capacity;
     }
-
-
 
 }

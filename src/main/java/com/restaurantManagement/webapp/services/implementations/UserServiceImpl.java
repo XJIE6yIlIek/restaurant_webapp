@@ -6,7 +6,6 @@ import com.restaurantManagement.webapp.models.dtos.UserDTO;
 import com.restaurantManagement.webapp.repositories.UserRepository;
 import com.restaurantManagement.webapp.repositories.UserRoleRepository;
 import com.restaurantManagement.webapp.services.interfaces.UserService;
-import io.micrometer.observation.Observation;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,12 +28,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> user.setPassword(null));
+        return users;
     }
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElse(null);
+        user.setPassword(null);
+        return user;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        user.setPassword(null);
+        return user;
     }
 
     @Override

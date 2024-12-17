@@ -53,6 +53,7 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
 
         order.setItems(items);
         orderRepository.save(order);
+
         return ResponseEntity.ok("Order successfully created: " + tableNumber);
     }
 

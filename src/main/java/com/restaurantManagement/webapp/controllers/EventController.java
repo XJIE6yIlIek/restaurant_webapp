@@ -27,12 +27,12 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEvent(@RequestParam EventDTO eventDTO) {
+    public ResponseEntity<String> createEvent(@RequestBody EventDTO eventDTO) {
         return eventService.createEvent(eventDTO);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<String> updateEvent(@PathVariable("id") Long id, @RequestParam EventDTO eventDTO) {
+    public ResponseEntity<String> updateEvent(@PathVariable("id") Long id, @RequestBody EventDTO eventDTO) {
         eventDTO.setId(id);
         return eventService.updateEvent(eventDTO);
     }
