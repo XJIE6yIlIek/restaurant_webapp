@@ -11,10 +11,11 @@ public class DishDTO {
     private Long id;
     private String name;
     private String description;
-    private float weight;
-    private float price;
+    private Float weight;
+    private Float price;
+    private Boolean stopped;
 
-    public DishDTO(String name, String description, float weight, float price) {
+    public DishDTO(String name, String description, Float weight, Float price) {
         this.name = name;
         this.description = description;
         this.weight = weight;

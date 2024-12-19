@@ -40,9 +40,9 @@ public class OrderController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<String> updateOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatusDTO orderStatusDTO) {
-        orderStatusDTO.setId(id);
-        return orderService.updateOrderStatus(orderStatusDTO);
+    public ResponseEntity<String> updateOrderStatus(@PathVariable("id") Long id, @RequestBody OrderDTO orderDTO) {
+        orderDTO.setId(id);
+        return orderService.updateOrderStatus(orderDTO);
     }
 
 }

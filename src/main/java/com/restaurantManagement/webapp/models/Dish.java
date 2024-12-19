@@ -21,11 +21,11 @@ public class Dish {
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "weight", nullable = false)
-    private float weight;
+    private Float weight;
     @Column(name = "price", nullable = false)
-    private float price;
+    private Float price;
 
-    public Dish(String name, String description, float weight, float price) {
+    public Dish(String name, String description, Float weight, Float price) {
         this.name = name;
         this.description = description;
         this.weight = weight;

@@ -12,7 +12,7 @@ import java.util.List;
 public interface OrderService {
 
     ResponseEntity<String> createOrder(OrderDTO orderDTO);
-    ResponseEntity<String> updateOrderStatus(OrderStatusDTO orderStatusDTO);
+    ResponseEntity<String> updateOrderStatus(OrderDTO orderDTO);
     List<Order> getOrdersByStatus(OrderStatusDTO statusDTO);
     List<Order> getAllOrders();
     Order getOrderById(Long id);

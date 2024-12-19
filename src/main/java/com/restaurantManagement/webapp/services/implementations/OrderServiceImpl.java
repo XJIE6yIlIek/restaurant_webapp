@@ -31,12 +31,12 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
     @Override
     @Transactional
     public ResponseEntity<String> createOrder(OrderDTO orderDTO) {
-        String statusName = orderDTO.getStatus().getName();
+        String statusName = "RECEIVED";
         String tableNumber = orderDTO.getTableNumber();
         Order order = new Order();
         order.setTableNumber(tableNumber);
         if (!Objects.isNull(orderStatusRepository.findByName(statusName))) {
-            OrderStatus orderStatus = orderStatusRepository.findByName(orderDTO.getStatus().getName());
+            OrderStatus orderStatus = orderStatusRepository.findByName(statusName);
             order.setStatus(orderStatus);
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Order status doesn't exist: " + statusName);
@@ -59,9 +59,9 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
 
     @Override
     @Transactional
-    public ResponseEntity<String> updateOrderStatus(OrderStatusDTO orderStatusDTO) {
-        Long id = orderStatusDTO.getId();
-        String statusName = orderStatusDTO.getName();
+    public ResponseEntity<String> updateOrderStatus(OrderDTO orderDTO) {
+        Long id = orderDTO.getId();
+        String statusName = orderDTO.getStatus().getName();
         Order order = orderRepository.findById(id).orElse(null);
         OrderStatus orderStatus = orderStatusRepository.findByName(statusName);
 
