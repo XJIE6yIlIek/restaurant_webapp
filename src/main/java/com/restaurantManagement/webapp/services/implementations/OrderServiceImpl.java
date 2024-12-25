@@ -1,5 +1,6 @@
 package com.restaurantManagement.webapp.services.implementations;
 
+import com.restaurantManagement.webapp.models.Dish;
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.OrderItem;
 import com.restaurantManagement.webapp.models.dtos.OrderDTO;
@@ -10,13 +11,16 @@ import com.restaurantManagement.webapp.repositories.OrderRepository;
 import com.restaurantManagement.webapp.repositories.OrderStatusRepository;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import jakarta.transaction.Transactional;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
@@ -83,7 +87,20 @@ public class OrderServiceImpl implements OrderService { // TODO: make it so some
 
     @Override
     public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+        List<Dish> dishes = dishRepository.findAll();
+        List<Order> orders = orderRepository.findAll();
+
+        Map<Long, String> dishIdToNameMap = dishes.stream()
+                .collect(Collectors.toMap(Dish::getId, Dish::getName));
+
+        for (Order order : orders) {
+            for (OrderItem item : order.getItems()) {
+                String dishName = dishIdToNameMap.get(item.getDishId());
+                item.setDishName(dishName);
+            }
+        }
+
+        return orders;
     }
 
     @Override

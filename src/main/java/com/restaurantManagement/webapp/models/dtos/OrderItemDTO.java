@@ -11,6 +11,7 @@ public class OrderItemDTO {
     private Long id;
     private OrderDTO order;
     private Long dishId;
+    private String dishName;
     private Long quantity;
 
     public OrderItemDTO(OrderDTO order, Long dishId, Long quantity) {

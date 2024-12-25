@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "events")
-public class Event { // FIXME: change table events in database a bit...(instead of time and date - timestamp)
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Event { // FIXME: change table events in database a bit...(instead 
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "event_time", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mmZ")
     private LocalDateTime eventTime;
     @Column(name = "capacity", nullable = false)
     private Long capacity;

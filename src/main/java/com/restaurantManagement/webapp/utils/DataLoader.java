@@ -1,4 +1,4 @@
-package com.restaurantManagement.webapp;
+package com.restaurantManagement.webapp.utils;
 
 import com.restaurantManagement.webapp.models.User;
 import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;

@@ -24,6 +24,8 @@ public class OrderItem {
     private Order order;
     @Column(name = "dish_id")
     private Long dishId;
+    @Transient
+    private String dishName;
     @Column(name = "quantity", nullable = false)
     private Long quantity;
 

@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService { // TODO: make it so some
             event.setName(eventDTO.getName());
             event.setDescription(eventDTO.getDescription());
             event.setEventTime(eventDTO.getEventTime());
-            event.setCapacity(event.getCapacity());
+            event.setCapacity(eventDTO.getCapacity());
             eventRepository.save(event);
             return ResponseEntity.ok("Event successfully updated: " + id + eventName);
         } else {

@@ -25,7 +25,7 @@ public class Order {
     @JoinColumn(name = "status")
     private OrderStatus status;
     @Column(name = "order_time", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mmZ")
     private LocalDateTime orderTime;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
