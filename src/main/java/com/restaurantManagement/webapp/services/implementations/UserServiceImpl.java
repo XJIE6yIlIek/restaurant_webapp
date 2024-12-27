@@ -36,7 +36,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         User user = userRepository.findById(id).orElse(null);
-        user.setPassword(null);
+        if (!Objects.isNull(user)) {
+            user.setPassword(null);
+        }
         return user;
     }
 
@@ -78,7 +80,9 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(userRepository.findByUsername(username)) && !Objects.isNull(user)) {
             user.setId(userDTO.getId());
             user.setUsername(userDTO.getUsername());
-            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            if (!Objects.isNull(userDTO.getPassword())) {
+                user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            }
             UserRole userRole = userRoleRepository.findByName(userDTO.getRole().getName());
             if (!Objects.isNull(userRole)) {
                 user.setRole(userRole);

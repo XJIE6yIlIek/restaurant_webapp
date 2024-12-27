@@ -3,15 +3,14 @@ package com.restaurantManagement.webapp.services.implementations;
 import com.restaurantManagement.webapp.models.Dish;
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.OrderItem;
-import com.restaurantManagement.webapp.models.dtos.OrderDTO;
 import com.restaurantManagement.webapp.models.OrderStatus;
+import com.restaurantManagement.webapp.models.dtos.OrderDTO;
 import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;
 import com.restaurantManagement.webapp.repositories.DishRepository;
 import com.restaurantManagement.webapp.repositories.OrderRepository;
 import com.restaurantManagement.webapp.repositories.OrderStatusRepository;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import jakarta.transaction.Transactional;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderServiceImpl implements OrderService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;

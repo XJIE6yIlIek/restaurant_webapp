@@ -2,7 +2,6 @@ package com.restaurantManagement.webapp.controllers;
 
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.dtos.OrderDTO;
-import com.restaurantManagement.webapp.models.OrderStatus;
 import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;
 import com.restaurantManagement.webapp.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

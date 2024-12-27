@@ -1,6 +1,5 @@
 package com.restaurantManagement.webapp.models.dtos;
 
-import com.restaurantManagement.webapp.models.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,14 +1,10 @@
 package com.restaurantManagement.webapp.utils;
 
-import com.restaurantManagement.webapp.models.User;
+import com.restaurantManagement.webapp.models.dtos.DishDTO;
 import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;
 import com.restaurantManagement.webapp.models.dtos.UserDTO;
 import com.restaurantManagement.webapp.models.dtos.UserRoleDTO;
-import com.restaurantManagement.webapp.repositories.OrderStatusRepository;
 import com.restaurantManagement.webapp.services.implementations.*;
-import com.restaurantManagement.webapp.services.interfaces.EventService;
-import com.restaurantManagement.webapp.services.interfaces.OrderStatusService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -31,10 +27,10 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        UserRoleDTO adminRole = new UserRoleDTO("ADMIN");
-        UserRoleDTO managerRole = new UserRoleDTO("MANAGER");
-        UserRoleDTO employeeRole = new UserRoleDTO("EMPLOYEE");
-        UserRoleDTO clientRole = new UserRoleDTO("CLIENT");
+        UserRoleDTO adminRole = new UserRoleDTO("ROLE_ADMIN");
+        UserRoleDTO managerRole = new UserRoleDTO("ROLE_MANAGER");
+        UserRoleDTO employeeRole = new UserRoleDTO("ROLE_EMPLOYEE");
+        UserRoleDTO clientRole = new UserRoleDTO("ROLE_CLIENT");
         userRoleService.createRole(adminRole);
         userRoleService.createRole(managerRole);
         userRoleService.createRole(employeeRole);
@@ -53,6 +49,15 @@ public class DataLoader implements CommandLineRunner {
         orderStatusService.createStatus(cookingStatus);
         orderStatusService.createStatus(readyStatus);
         orderStatusService.createStatus(deliveredStatus);
+
+        DishDTO soupDish = new DishDTO("Soup", "Cheap soup", 0.5F, 100F);
+        DishDTO saladDish = new DishDTO("Salad", "Vegetarian food", 0.2F, 150F);
+        DishDTO chickenDish = new DishDTO("Chicken", "Big chicken meal", 1F, 300F);
+        DishDTO sodaDish = new DishDTO("Soda", "Soda. Just soda", 0.33F, 70F);
+        dishService.createDish(soupDish);
+        dishService.createDish(saladDish);
+        dishService.createDish(chickenDish);
+        dishService.createDish(sodaDish);
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class DishServiceImpl implements DishService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
+public class DishServiceImpl implements DishService {
 
     @Autowired
     private DishRepository dishRepository;

@@ -3,8 +3,6 @@ package com.restaurantManagement.webapp.controllers;
 import com.restaurantManagement.webapp.models.UserRole;
 import com.restaurantManagement.webapp.models.dtos.UserRoleDTO;
 import com.restaurantManagement.webapp.services.implementations.UserRoleServiceImpl;
-import com.restaurantManagement.webapp.services.interfaces.UserRoleService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

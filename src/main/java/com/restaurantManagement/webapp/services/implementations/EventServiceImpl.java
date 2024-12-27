@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class EventServiceImpl implements EventService { // TODO: make it so some methods return responseentity as in CustomUserDetailsServiceImpl
+public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
 
     @Override
     @Transactional
-    public ResponseEntity<String> createEvent(EventDTO eventDTO) { // TODO: check if there is less than n events that day
+    public ResponseEntity<String> createEvent(EventDTO eventDTO) {
         String eventName = eventDTO.getName();
         Event event = new Event();
         event.setName(eventName);

@@ -2,9 +2,7 @@ package com.restaurantManagement.webapp.services.interfaces;
 
 import com.restaurantManagement.webapp.models.Order;
 import com.restaurantManagement.webapp.models.dtos.OrderDTO;
-import com.restaurantManagement.webapp.models.OrderStatus;
 import com.restaurantManagement.webapp.models.dtos.OrderStatusDTO;
-import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

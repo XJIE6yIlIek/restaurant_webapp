@@ -20,7 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfig { // ОНО РАБОТАЕТ, НЕ ТРОГААААААТЬ!!!! (for now...)
+public class SecurityConfig {
 
     @Autowired
     private CustomUserDetailsServiceImpl userDetailsService;
@@ -44,16 +44,9 @@ public class SecurityConfig { // ОНО РАБОТАЕТ, НЕ ТРОГАААА�
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { // FIXME: edit access to different urls; make it so everything works correctly with rest
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
-//                .sessionManagement(session ->
-//                                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeHttpRequests(auth -> {
-//                                        auth.requestMatchers("/api/login").permitAll();
-//                                        auth.anyRequest().authenticated();
-//                });
-//        http.formLogin(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }
